@@ -1,9 +1,13 @@
 project(kdevkernel)
+cmake_minimum_required(VERSION 2.8)
 
+find_package(Qt4 REQUIRED)
 find_package(KDE4 4.7.0 REQUIRED)
 find_package(KDevPlatform 1.2.60 REQUIRED)
 
+
 include_directories(
+    ${QT_INCLUDES}
     ${KDE4_INCLUDES}
     ${KDEVPLATFORM_INCLUDE_DIR}
     ${KDEVPLATFORM_INCLUDE_DIR}/../kdevelop
@@ -13,6 +17,7 @@ include_directories(
     ${CMAKE_PREFIX_PATH}/include/kdevelop
 )
 
+
 set(kdevkernel_plugin_SRCS
     kdevkernelplugin.cpp
 )
@@ -20,6 +25,7 @@ set(kdevkernel_plugin_SRCS
 kde4_add_plugin(kdevkernel
     ${kdevkernel_plugin_SRCS})
 target_link_libraries(kdevkernel
+    ${QT_QTCORE_LIBRARY}
     ${KDEVPLATFORM_PROJECT_LIBRARIES}
     ${KDEVPLATFORM_INTERFACES_LIBRARIES}
     ${KDEVPLATFORM_UTIL_LIBRARIES}
